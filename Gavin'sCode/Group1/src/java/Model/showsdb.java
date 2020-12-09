@@ -184,39 +184,135 @@ public class showsdb {
         }
         return allshows;
     }
-//public shows findBookByshowsID(int showsID) {
-//        
-//        shows show = null;
-//        System.out.println(" find all shows by ID");
-//        Connection c = DatabaseHelper.getConnection();
-//
-//        String template = "SELECT * FROM pieces where ShowsID = ?";
-//        
-//        if (c != null) {
-//            try {
-//                PreparedStatement inserter = c.prepareStatement(template);
-//                inserter.setInt(1, showsID);
-//                ResultSet resultSet = inserter.executeQuery();
-//                System.out.println(inserter);
-//                while (resultSet.next()) {
-//                    shows s = new shows();
-//                     s.setCategory(resultSet.getString("category"));
-//                    s.setDepartment(resultSet.getString("department"));
-//                    s.setstartingDate(resultSet.getDate("startingDate"));
-//                   s.setClosingDate(resultSet.getDate("closingDate" ));
-//                    s.setDescription(resultSet.getString("description"));
-//                   
-//                   
-//                }
-//                inserter.close();
-//                c.close();
-//            } catch (SQLException ex) {
-//                System.out.println("Error on find all " + ex);
-//            }
-//
-//        }
-//        return findBookByshowsID(showsID);
-//    }    
+public shows findshowsByshowsID(int showsID) {
+        
+        shows show = null;
+        System.out.println(" find all shows by ID");
+        Connection c = DatabaseHelper.getConnection();
+
+        String template = "SELECT * FROM pieces where ShowsID = ?";
+        
+        if (c != null) {
+            try {
+                PreparedStatement inserter = c.prepareStatement(template);
+                inserter.setInt(1, showsID);
+                ResultSet resultSet = inserter.executeQuery();
+                System.out.println(inserter);
+                while (resultSet.next()) {
+                    shows s = new shows();
+                     s.setCategory(resultSet.getString("category"));
+                    s.setDepartment(resultSet.getString("department"));
+                    s.setstartingDate(resultSet.getDate("startingDate"));
+                   s.setClosingDate(resultSet.getDate("closingDate" ));
+                    s.setDescription(resultSet.getString("description"));
+                   
+                     
+                }
+                inserter.close();
+                c.close();
+            } catch (SQLException ex) {
+                System.out.println("Error on find all " + ex);
+            }
+
+        }
+        return findshowsByshowsID(showsID);
+    }    
+public boolean updateshows(String category) {
+     //   boolean inserted = false;
+        
+        Connection c = DatabaseHelper.getConnection();
+        String template = "UPDATE shows SET category = ?, department = ?, startingDate = ?, closingDate = ? , decription = ? ,WHERE showsID = ?";
+        if (c != null) {
+            try {
+                PreparedStatement inserter = c.prepareStatement(template);
+                
+            inserter.setString(1, this.category);
+                inserter.setString(2, this.department);
+                java.sql.Date sqlDate = new java.sql.Date(this.startingDate.getTime());
+                inserter.setDate(3, sqlDate);
+                 sqlDate = new java.sql.Date(this.closingDate.getTime());
+                inserter.setDate(4, sqlDate);
+                inserter.setString(5, this.description);
+                 
+                 
+              
+                int i = inserter.executeUpdate();
+                return true;
+            } catch (SQLException ex) {
+                System.out.println("Error on update " + ex);
+                return false;
+            }
+           
+        }  
+        return true;
+    }
+public boolean updateshows() {
+     //   boolean inserted = false;
+
+        Connection c = DatabaseHelper.getConnection();
+        System.out.println("showsDB class:");
+        
+        String template = "UPDATE shows SET category = ?, department = ?, startingDate = ?, closingDate = ? , decription = ? ,WHERE showsID = ?";
+        if (c != null) {
+            try {
+                PreparedStatement inserter = c.prepareStatement(template);
+             inserter.setString(1, this.category);
+                inserter.setString(2, this.department);
+                java.sql.Date sqlDate = new java.sql.Date(this.startingDate.getTime());
+                inserter.setDate(3, sqlDate);
+                 sqlDate = new java.sql.Date(this.closingDate.getTime());
+                inserter.setDate(4, sqlDate);
+                inserter.setString(5, this.description);
+             
+                    System.out.println(inserter);
+                int i = inserter.executeUpdate();
+                return true;
+            } catch (SQLException ex) {
+                System.out.println("Error on update " + ex);
+                return false;
+            }
+           
+        }  
+        return true;
+    }
+public boolean deleteshows(String category) {
+     //   boolean inserted = false;
+
+        Connection c = DatabaseHelper.getConnection();
+        String template = "DELETE FROM shows WHERE category = ?";
+        if (c != null) {
+            try {
+                PreparedStatement inserter = c.prepareStatement(template);
+                inserter.setString(1, category);
+                int i = inserter.executeUpdate();
+                return true;
+            } catch (SQLException ex) {
+                System.out.println("Error on find all " + ex);
+                return false;
+            }
+           
+        }  
+        return true;
+    }
+    public boolean deleteshowsByshowID(String showsID) {
+     //   boolean inserted = false;
+
+        Connection c = DatabaseHelper.getConnection();
+        String template = "DELETE FROM shows WHERE showsID = ?";
+        if (c != null) {
+            try {
+                PreparedStatement inserter = c.prepareStatement(template);
+                inserter.setString(1, showsID);
+                int i = inserter.executeUpdate();
+                return true;
+            } catch (SQLException ex) {
+                System.out.println("Error on find all " + ex);
+                return false;
+            }
+           
+        }  
+        return true;
+    }
 
     
     

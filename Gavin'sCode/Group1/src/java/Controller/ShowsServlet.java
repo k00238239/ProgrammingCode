@@ -62,7 +62,12 @@ public class ShowsServlet extends HttpServlet {
             case "processAddShow":
                 nextPage = processAddShow(request, session);
                 break;
-
+             case "UpdateShows":
+                nextPage = processGetshowsDetailsByshowsID(request, session);
+                break;
+                     case "deleteshows":
+                nextPage = processDeleteshows(request, session);
+                break;
             default:
 
         }
@@ -181,6 +186,35 @@ public class ShowsServlet extends HttpServlet {
             return this.processRequestAllShow(session);
         }
         return null;
+    }
+
+    private String processGetshowsDetailsByshowsID(HttpServletRequest request, HttpSession session) {
+      String nextPage;
+        System.out.println("Edit shows");
+        
+        shows showDetails = new shows();
+        
+        String showsIDString = (String) request.getParameter("showsID");
+        System.out.println("Edit shows for showsID =" + showsIDString);
+        int showsID = Integer.parseInt(showsIDString);
+        showDetails = showDetails.findshowsByshowsID(showsID);
+        showDetails.Print();
+        session.setAttribute("shows", showDetails);
+        nextPage = "/UpdateShows.jsp";
+        return nextPage;
+    }
+
+    private String processDeleteshows(HttpServletRequest request, HttpSession session) {
+           String nextPage;
+        System.out.println("Delete shows");
+        //get book details
+           shows showDetails = new shows();
+        //get bookid from request
+        String showsIDString = (String) request.getParameter("showsID");
+        System.out.println("delete shows for showsID " + showsIDString);
+        showDetails.deleteshows(showsIDString);
+        //display the page again - need a new list to reflect deleted book
+        return this.processRequestAllShow(session);
     }
 
 }

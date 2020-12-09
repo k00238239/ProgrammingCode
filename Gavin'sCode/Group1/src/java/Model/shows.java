@@ -140,14 +140,7 @@ public class shows implements Serializable{
         
     }
 
-    public void Print(){
-            System.out.println("category " +category);
-        System.out.println("department " +department);
-        System.out.println("startingDate " +startingDate);
-        System.out.println("closingDate " + closingDate);
-        System.out.println("description" +description);
-    
-}
+
       public boolean createshow() {
 
         showsdb showsdb = new showsdb(category,department,startingDate,closingDate,description);
@@ -160,6 +153,40 @@ public class shows implements Serializable{
         return showdb.findAllShows();
      
     }
+   public shows findshowsByshowsID(int showsID) {
+         showsdb showdb = new showsdb();
+        return showdb.findshowsByshowsID(showsID);
+   }
+    public boolean updateshows(String showsID){
+       
+        showsdb showdb = new showsdb();
+        return showdb.updateshows(showsID);
+    }
+    public boolean updateshows(){
+        System.out.println("shows:update");
+        this.Print();
+        
+          showsdb showdb = new showsdb();
+        return showdb.updateshows();
+    }
+      public boolean deleteshows(String showsID){
+       
+         showsdb showdb = new showsdb();
+        return showdb.deleteshows(showsID);
+    }
+    public boolean deleteshowsByshowsID(String showsID){
+       
+        showsdb showdb = new showsdb();
+        return showdb.updateshows(category);
+    }
+        public void Print(){
+            System.out.println("category " +category);
+        System.out.println("department " +department);
+        System.out.println("startingDate " +startingDate);
+        System.out.println("closingDate " + closingDate);
+        System.out.println("description" +description);
+    
+}
     
     
 }

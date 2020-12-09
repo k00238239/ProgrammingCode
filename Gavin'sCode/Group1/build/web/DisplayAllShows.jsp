@@ -62,6 +62,9 @@
                      <td><c:out value="${s.description}" /></td>
                    <td>
                      
+                         <a href="/Group1/ShowsServlet?action=UpdateShows&showsID=<c:out value='${s.showsID}' />">Update</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a onclick="del_confirm('Are you Sure want to delete the show <c:out value="${s.category}" />?','/Group1/ShowsServlet?action=deleteshows&showsID=<c:out value='${s.category}' />')" href="#">Delete</a> 
                         
                         
                     </td>
