@@ -55,11 +55,11 @@
             <tr>
                 <c:forEach var="s" items="${Allshows}">
                 <tr>
-                    <td><c:out value="${s.Category}" /></td>
-                    <td><c:out value="${s.Department}" /></td>
-                    <td><c:out value="${s.StartingDate}" /></td>
-                    <td><c:out value="${s.ClosingDate}" /></td>
-                     <td><c:out value="${s.Description}" /></td>
+                    <td><c:out value="${s.category}" /></td>
+                    <td><c:out value="${s.department}" /></td>
+                    <td><c:out value="${s.startingDate}" /></td>
+                    <td><c:out value="${s.closingDate}" /></td>
+                     <td><c:out value="${s.description}" /></td>
                    <td>
                      
                         

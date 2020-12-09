@@ -170,7 +170,7 @@ public class showsdb {
                     s.setClosingDate(resultSet.getDate("ClosingDate" ));
                     s.setDescription(resultSet.getString("Description" ));
 
-                     findAllShows();
+                     allshows.add(s);
 
                 }
 
