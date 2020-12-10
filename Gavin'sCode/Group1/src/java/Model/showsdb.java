@@ -17,8 +17,9 @@ import java.util.Date;
  * @author gavok
  */
 public class showsdb {
+
     private String showsID;
-     private String category;
+    private String category;
     private String department;
     private Date startingDate;
     private Date closingDate;
@@ -27,9 +28,18 @@ public class showsdb {
     public showsdb() {
     }
 
-    public showsdb( String category, String department, Date startingDate, Date closingDate, String description) {
-      
+    public showsdb(String category, String department, Date startingDate, Date closingDate, String description) {
+
         this.category = category;
+        this.department = department;
+        this.startingDate = startingDate;
+        this.closingDate = closingDate;
+        this.description = description;
+    }
+
+    showsdb(String showsID, String category, String department, Date startingDate, Date closingDate, String description) {
+       this.showsID =showsID;
+          this.category = category;
         this.department = department;
         this.startingDate = startingDate;
         this.closingDate = closingDate;
@@ -119,22 +129,23 @@ public class showsdb {
     public void setDescription(String description) {
         this.description = description;
     }
-     public boolean createshow() {
-     //   boolean inserted = false;
+
+    public boolean createshow() {
+        //   boolean inserted = false;
 
         Connection c = DatabaseHelper.getConnection();
         String template = "INSERT INTO pieces (Category,Department,StartingDate,ClosingDate,Description) VALUES (?,?,?,?,?)";
         java.util.Date utilDate = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-       
+
         if (c != null) {
             try {
                 PreparedStatement inserter = c.prepareStatement(template);
                 inserter.setString(1, this.category);
                 inserter.setString(2, this.department);
-               sqlDate = new java.sql.Date(this.startingDate.getTime());
+                sqlDate = new java.sql.Date(this.startingDate.getTime());
                 inserter.setDate(3, sqlDate);
-                 sqlDate = new java.sql.Date(this.closingDate.getTime());
+                sqlDate = new java.sql.Date(this.closingDate.getTime());
                 inserter.setDate(4, sqlDate);
                 inserter.setString(5, this.description);
                 System.out.println(inserter);
@@ -144,14 +155,15 @@ public class showsdb {
                 System.out.println("Error on find all " + ex);
                 return false;
             }
-           
-        }  
+
+        }
         return true;
     }
-     public ArrayList<shows> findAllShows() {
+
+    public ArrayList<shows> findAllShows() {
 
         System.out.println(" find all shows");
-        ArrayList<shows> allshows = new ArrayList<shows>();
+        ArrayList<shows> allshows = new ArrayList<>();
 
         Connection c = DatabaseHelper.getConnection();
 
@@ -164,13 +176,13 @@ public class showsdb {
 
                 while (resultSet.next()) {
                     shows s = new shows();
-                    s.setCategory(resultSet.getString("Category" ));
+                    s.setCategory(resultSet.getString("Category"));
                     s.setDepartment(resultSet.getString("Department"));
-                    s.setstartingDate(resultSet.getDate("StartingDate" ));
-                    s.setClosingDate(resultSet.getDate("ClosingDate" ));
-                    s.setDescription(resultSet.getString("Description" ));
-
-                     allshows.add(s);
+                    s.setstartingDate(resultSet.getDate("StartingDate"));
+                    s.setClosingDate(resultSet.getDate("ClosingDate"));
+                    s.setDescription(resultSet.getString("Description"));
+                    s.setShowsID(resultSet.getString("showsID"));
+                    allshows.add(s);
 
                 }
 
@@ -184,29 +196,30 @@ public class showsdb {
         }
         return allshows;
     }
-public shows findshowsByshowsID(int showsID) {
-        
+
+    public shows findshowsByshowsID(String showsID) {
+
         shows show = null;
         System.out.println(" find all shows by ID");
         Connection c = DatabaseHelper.getConnection();
 
-        String template = "SELECT * FROM pieces where ShowsID = ?";
-        
+        String template = "SELECT * FROM pieces where showsID = ?";
+
         if (c != null) {
             try {
                 PreparedStatement inserter = c.prepareStatement(template);
-                inserter.setInt(1, showsID);
+                inserter.setString(1, showsID);
                 ResultSet resultSet = inserter.executeQuery();
                 System.out.println(inserter);
                 while (resultSet.next()) {
-                    shows s = new shows();
-                     s.setCategory(resultSet.getString("category"));
-                    s.setDepartment(resultSet.getString("department"));
-                    s.setstartingDate(resultSet.getDate("startingDate"));
-                   s.setClosingDate(resultSet.getDate("closingDate" ));
-                    s.setDescription(resultSet.getString("description"));
-                   
-                     
+                    show = new shows();
+                    show.setCategory(resultSet.getString("category"));
+                    show.setDepartment(resultSet.getString("department"));
+                    show.setstartingDate(resultSet.getDate("startingDate"));
+                    show.setClosingDate(resultSet.getDate("closingDate"));
+                    show.setDescription(resultSet.getString("description"));
+                    show.setShowsID(resultSet.getString("showsID"));
+
                 }
                 inserter.close();
                 c.close();
@@ -215,105 +228,56 @@ public shows findshowsByshowsID(int showsID) {
             }
 
         }
-        return findshowsByshowsID(showsID);
-    }    
-public boolean updateshows(String category) {
-     //   boolean inserted = false;
-        
+        return show;
+    }
+
+    public boolean updateshows() {
+        //   boolean inserted = false;
+
         Connection c = DatabaseHelper.getConnection();
-        String template = "UPDATE shows SET category = ?, department = ?, startingDate = ?, closingDate = ? , decription = ? ,WHERE showsID = ?";
+        String template = "UPDATE pieces SET category = ?, department = ?, startingDate = ?, closingDate = ? , decription = ? WHERE showsID = ?";
         if (c != null) {
             try {
                 PreparedStatement inserter = c.prepareStatement(template);
-                
-            inserter.setString(1, this.category);
+
+                inserter.setString(1, this.category);
                 inserter.setString(2, this.department);
                 java.sql.Date sqlDate = new java.sql.Date(this.startingDate.getTime());
                 inserter.setDate(3, sqlDate);
-                 sqlDate = new java.sql.Date(this.closingDate.getTime());
+                sqlDate = new java.sql.Date(this.closingDate.getTime());
                 inserter.setDate(4, sqlDate);
                 inserter.setString(5, this.description);
-                 
-                 
-              
+                inserter.setString(6, this.showsID);
+                  System.out.println("update show::" + inserter);
                 int i = inserter.executeUpdate();
                 return true;
             } catch (SQLException ex) {
                 System.out.println("Error on update " + ex);
                 return false;
             }
-           
-        }  
+
+        }
         return true;
     }
-public boolean updateshows() {
-     //   boolean inserted = false;
+
+    public boolean deleteshowsByshowID(String dshowsID) {
+        //   boolean inserted = false;
 
         Connection c = DatabaseHelper.getConnection();
-        System.out.println("showsDB class:");
-        
-        String template = "UPDATE shows SET category = ?, department = ?, startingDate = ?, closingDate = ? , decription = ? ,WHERE showsID = ?";
+        String template = "DELETE FROM pieces WHERE showsID = ?";
         if (c != null) {
             try {
                 PreparedStatement inserter = c.prepareStatement(template);
-             inserter.setString(1, this.category);
-                inserter.setString(2, this.department);
-                java.sql.Date sqlDate = new java.sql.Date(this.startingDate.getTime());
-                inserter.setDate(3, sqlDate);
-                 sqlDate = new java.sql.Date(this.closingDate.getTime());
-                inserter.setDate(4, sqlDate);
-                inserter.setString(5, this.description);
-             
-                    System.out.println(inserter);
-                int i = inserter.executeUpdate();
-                return true;
-            } catch (SQLException ex) {
-                System.out.println("Error on update " + ex);
-                return false;
-            }
-           
-        }  
-        return true;
-    }
-public boolean deleteshows(String category) {
-     //   boolean inserted = false;
-
-        Connection c = DatabaseHelper.getConnection();
-        String template = "DELETE FROM shows WHERE category = ?";
-        if (c != null) {
-            try {
-                PreparedStatement inserter = c.prepareStatement(template);
-                inserter.setString(1, category);
+                inserter.setString(1, dshowsID);
                 int i = inserter.executeUpdate();
                 return true;
             } catch (SQLException ex) {
                 System.out.println("Error on find all " + ex);
                 return false;
             }
-           
-        }  
-        return true;
-    }
-    public boolean deleteshowsByshowID(String showsID) {
-     //   boolean inserted = false;
 
-        Connection c = DatabaseHelper.getConnection();
-        String template = "DELETE FROM shows WHERE showsID = ?";
-        if (c != null) {
-            try {
-                PreparedStatement inserter = c.prepareStatement(template);
-                inserter.setString(1, showsID);
-                int i = inserter.executeUpdate();
-                return true;
-            } catch (SQLException ex) {
-                System.out.println("Error on find all " + ex);
-                return false;
-            }
-           
-        }  
+        }
         return true;
     }
 
-    
-    
 }

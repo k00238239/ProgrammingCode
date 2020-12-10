@@ -59,18 +59,17 @@ public final class DisplayAllShows_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("\n");
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
-      out.write("<script>  function del_confirm(msg,url)\n");
+      out.write("<script>  function del_confirm(msg, url)\n");
+      out.write("    {\n");
+      out.write("        if (confirm(msg))\n");
       out.write("        {\n");
-      out.write("            if(confirm(msg))\n");
-      out.write("            {\n");
-      out.write("                window.location.href=url;\n");
-      out.write("            }\n");
-      out.write("            else\n");
-      out.write("            {\n");
-      out.write("                false;\n");
-      out.write("            }\n");
+      out.write("            window.location.href = url;\n");
+      out.write("        } else\n");
+      out.write("        {\n");
+      out.write("            false;\n");
+      out.write("        }\n");
       out.write("\n");
-      out.write("        }  </script>\n");
+      out.write("    }</script>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
@@ -93,11 +92,12 @@ public final class DisplayAllShows_jsp extends org.apache.jasper.runtime.HttpJsp
         return;
       out.write("\n");
       out.write("        <a href=\"/Group1/ShowsServlet?action=home\">Home Page</a>\n");
-      out.write("         <form action=\"ShowsServlet\" method=\"get\">\n");
-      out.write("        \n");
-      out.write("         <br>\n");
-      out.write("         \n");
-      out.write("         </form>\n");
+      out.write("        <form action=\"ShowsServlet\" method=\"get\">\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("            <br>\n");
+      out.write("\n");
+      out.write("        </form>\n");
       out.write("        <table>\n");
       out.write("            <tr>\n");
       out.write("                <th>category</th>\n");
@@ -105,14 +105,15 @@ public final class DisplayAllShows_jsp extends org.apache.jasper.runtime.HttpJsp
       out.write("                <th>startingDate</th>\n");
       out.write("                <th>closingDate</th>\n");
       out.write("                <th>description</th>\n");
-      out.write("               \n");
+      out.write("                <th>Action</th>\n");
+      out.write("\n");
       out.write("            </tr>\n");
       out.write("            <tr>\n");
       out.write("                ");
       if (_jspx_meth_c_forEach_0(_jspx_page_context))
         return;
       out.write("   \n");
-      out.write("           \n");
+      out.write("\n");
       out.write("        </tr>\n");
       out.write("    </table>\n");
       out.write("</body>\n");
@@ -183,13 +184,14 @@ public final class DisplayAllShows_jsp extends org.apache.jasper.runtime.HttpJsp
           if (_jspx_meth_c_out_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
             return true;
           out.write("</td>\n");
-          out.write("                     <td>");
+          out.write("                    <td>");
           if (_jspx_meth_c_out_5((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
             return true;
           out.write("</td>\n");
-          out.write("                   <td>\n");
-          out.write("                     \n");
-          out.write("                         <a href=\"/Group1/ShowsServlet?action=UpdateShows&showsID=");
+          out.write("\n");
+          out.write("                    <td>\n");
+          out.write("\n");
+          out.write("                        <a href=\"/Group1/ShowsServlet?action=UpdateShows&showsID=");
           if (_jspx_meth_c_out_6((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
             return true;
           out.write("\">Update</a>\n");
@@ -197,12 +199,12 @@ public final class DisplayAllShows_jsp extends org.apache.jasper.runtime.HttpJsp
           out.write("                        <a onclick=\"del_confirm('Are you Sure want to delete the show ");
           if (_jspx_meth_c_out_7((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
             return true;
-          out.write("?','/Group1/ShowsServlet?action=deleteshows&showsID=");
+          out.write("?', '/Group1/ShowsServlet?action=deleteshows&showsID=");
           if (_jspx_meth_c_out_8((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
             return true;
           out.write("')\" href=\"#\">Delete</a> \n");
-          out.write("                        \n");
-          out.write("                        \n");
+          out.write("\n");
+          out.write("\n");
           out.write("                    </td>\n");
           out.write("                </tr>\n");
           out.write("            ");
@@ -359,7 +361,7 @@ public final class DisplayAllShows_jsp extends org.apache.jasper.runtime.HttpJsp
     org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_8 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
     _jspx_th_c_out_8.setPageContext(_jspx_page_context);
     _jspx_th_c_out_8.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_0);
-    _jspx_th_c_out_8.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${s.category}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_out_8.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${s.showsID}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     int _jspx_eval_c_out_8 = _jspx_th_c_out_8.doStartTag();
     if (_jspx_th_c_out_8.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_8);

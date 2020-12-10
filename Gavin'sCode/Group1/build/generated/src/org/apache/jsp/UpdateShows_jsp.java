@@ -59,48 +59,51 @@ public final class UpdateShows_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>JSP Page</title>\n");
+      out.write("        <title>Update Show</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
       out.write("        <h1>Update Show</h1>\n");
       out.write("        <form action=\"ShowsServlet\" method=\"GET\" enctype=\"multipart/form-data\">\n");
       out.write("            <input type=\"hidden\" name=\"action\" value=\"saveShow\">\n");
-      out.write("            <input type=\"hidden\" name=\"ShowsID\" value=");
+      out.write("            \n");
+      out.write("            <input type=\"hidden\" name=\"showsID\" value=");
       if (_jspx_meth_c_out_0(_jspx_page_context))
         return;
       out.write(">\n");
+      out.write("            \n");
       out.write("            <label for=\"category\">category:</label>\n");
       out.write("            <input type=\"text\" id=\"category\" name=\"category\" value=");
       if (_jspx_meth_c_out_1(_jspx_page_context))
         return;
       out.write("><br>\n");
-      out.write("            \n");
+      out.write("\n");
       out.write("            <label for=\"department\">department:</label>\n");
       out.write("            <input type=\"text\" id=\"department\" name=\"department\" value=");
       if (_jspx_meth_c_out_2(_jspx_page_context))
         return;
       out.write("><br>\n");
-      out.write("            \n");
+      out.write("\n");
       out.write("            <label for=\"startingDate\">startingDate:</label>\n");
       out.write("            <input type=\"date\" id=\"startingDate\" name=\"startingDate\" value=\"");
       if (_jspx_meth_c_out_3(_jspx_page_context))
         return;
       out.write("\"><br>\n");
-      out.write("            \n");
-      out.write("             <label for=\"closingDate\">closingDate:</label>\n");
-      out.write("             <input type=\"date\" id=\"closingDate\" name=\"closingDate\" value=\"");
+      out.write("\n");
+      out.write("            <label for=\"closingDate\">closingDate:</label>\n");
+      out.write("            <input type=\"date\" id=\"closingDate\" name=\"closingDate\" value=\"");
       if (_jspx_meth_c_out_4(_jspx_page_context))
         return;
       out.write("\"><br>\n");
-      out.write("               <label for=\"desciption\">description</label>\n");
+      out.write("           \n");
+      out.write("            <label for=\"desciption\">description</label>\n");
       out.write("            <input type=\"text\" id=\"description\" name=\"description\"><br>\n");
-      out.write("            \n");
-      out.write("           \n");
-      out.write("           \n");
-      out.write("            \n");
-      out.write("            \n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("            <input type=\"submit\" value=\"Submit\">\n");
-      out.write("            \n");
+      out.write("\n");
       out.write("        </form>\n");
       out.write("    </body>\n");
       out.write("</html>\n");
@@ -125,7 +128,7 @@ public final class UpdateShows_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_out_0 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _jspx_tagPool_c_out_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
     _jspx_th_c_out_0.setPageContext(_jspx_page_context);
     _jspx_th_c_out_0.setParent(null);
-    _jspx_th_c_out_0.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${shows.ShowsID}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_out_0.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${shows.showsID}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     int _jspx_eval_c_out_0 = _jspx_th_c_out_0.doStartTag();
     if (_jspx_th_c_out_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_out_value_nobody.reuse(_jspx_th_c_out_0);

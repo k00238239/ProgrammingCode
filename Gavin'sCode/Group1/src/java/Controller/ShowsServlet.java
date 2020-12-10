@@ -62,10 +62,10 @@ public class ShowsServlet extends HttpServlet {
             case "processAddShow":
                 nextPage = processAddShow(request, session);
                 break;
-             case "UpdateShows":
+            case "UpdateShows":
                 nextPage = processGetshowsDetailsByshowsID(request, session);
                 break;
-                     case "deleteshows":
+            case "deleteshows":
                 nextPage = processDeleteshows(request, session);
                 break;
             default:
@@ -84,7 +84,7 @@ public class ShowsServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -125,6 +125,7 @@ public class ShowsServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// 
+
     private void gotoPage(String url, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher
@@ -139,8 +140,10 @@ public class ShowsServlet extends HttpServlet {
         //get new book details from request
         String category = request.getParameter("category");
         String department = request.getParameter("department");
-      String startingDate = request.getParameter("startingDate");
-        String closingDate = request.getParameter("closingDate");
+        String dateString = request.getParameter("startingDate");
+        String dateStrings = request.getParameter("closingDate");
+        Date startingDate = new SimpleDateFormat("dd/mm/yyyy").parse(dateString);
+        Date closingDate = new SimpleDateFormat("dd/mm/yyyy").parse(dateStrings);
 
         String description = request.getParameter("description");
         shows s = new shows(category, department, startingDate, closingDate, description);
@@ -189,15 +192,15 @@ public class ShowsServlet extends HttpServlet {
     }
 
     private String processGetshowsDetailsByshowsID(HttpServletRequest request, HttpSession session) {
-      String nextPage;
+        String nextPage;
         System.out.println("Edit shows");
-        
+
         shows showDetails = new shows();
-        
+
         String showsIDString = (String) request.getParameter("showsID");
         System.out.println("Edit shows for showsID =" + showsIDString);
         int showsID = Integer.parseInt(showsIDString);
-        showDetails = showDetails.findshowsByshowsID(showsID);
+        showDetails = showDetails.findshowsByshowsID(showsIDString);
         showDetails.Print();
         session.setAttribute("shows", showDetails);
         nextPage = "/UpdateShows.jsp";
@@ -205,14 +208,16 @@ public class ShowsServlet extends HttpServlet {
     }
 
     private String processDeleteshows(HttpServletRequest request, HttpSession session) {
-           String nextPage;
+        String nextPage;
         System.out.println("Delete shows");
-        //get book details
-           shows showDetails = new shows();
+        //get show details
+        shows showDetails = new shows();
+        
         //get bookid from request
         String showsIDString = (String) request.getParameter("showsID");
+        //int showsID= Integer.parseInt(showsIDString);
         System.out.println("delete shows for showsID " + showsIDString);
-        showDetails.deleteshows(showsIDString);
+        showDetails.deleteshowsByshowsID(showsIDString);
         //display the page again - need a new list to reflect deleted book
         return this.processRequestAllShow(session);
     }

@@ -14,8 +14,9 @@ import java.util.Scanner;
  *
  * @author gavok
  */
-public class shows implements Serializable{
-    private int showsID;
+public class shows implements Serializable {
+
+    private String showsID;
     private String category;
     private String department;
     private Date startingDate;
@@ -25,8 +26,8 @@ public class shows implements Serializable{
     public shows() {
     }
 
-    public shows( String category, String department, Date startingDate, Date closingDate, String description) {
-       this.showsID = showsID;
+    public shows(String category, String department, Date startingDate, Date closingDate, String description) {
+
         this.category = category;
         this.department = department;
         this.startingDate = startingDate;
@@ -34,27 +35,26 @@ public class shows implements Serializable{
         this.description = description;
     }
 
-    public shows(String category, String department, String  startingDate, String  closingDate, String description) {
-        
-        
-      
+    public shows(String showsID, String category, String department, Date startingDate, Date closingDate, String description) {
+        this.showsID = showsID;
+        this.category = category;
+        this.department = department;
+        this.startingDate = startingDate;
+        this.closingDate = closingDate;
+        this.description = description;
     }
-
- 
-
-   
 
     /**
      * @return the showsID
      */
-    public int getShowsID() {
+    public String getShowsID() {
         return showsID;
     }
 
     /**
      * @param showsID the showsID to set
      */
-    public void setShowsID(int showsID) {
+    public void setShowsID(String showsID) {
         this.showsID = showsID;
     }
 
@@ -127,66 +127,57 @@ public class shows implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
-    
-     public void getUserInput() {
+
+    public void getUserInput() {
         Scanner s = new Scanner(System.in);
         System.out.println("Enter category");
         category = s.next();
         System.out.println("Enter department");
         department = s.next();
         System.out.println("Enter startingDate" + startingDate);
-       
-        System.out.println("Enter closingDate" +closingDate);
-        
+
+        System.out.println("Enter closingDate" + closingDate);
+
     }
 
+    public boolean createshow() {
 
-      public boolean createshow() {
-
-        showsdb showsdb = new showsdb(category,department,startingDate,closingDate,description);
+        showsdb showsdb = new showsdb(category, department, startingDate, closingDate, description);
         return showsdb.createshow();
     }
-        
-    public ArrayList<shows> findAllShows() { 
-    
-     showsdb showdb = new showsdb();
-        return showdb.findAllShows();
-     
-    }
-   public shows findshowsByshowsID(int showsID) {
-         showsdb showdb = new showsdb();
-        return showdb.findshowsByshowsID(showsID);
-   }
-    public boolean updateshows(String showsID){
-       
+
+    public ArrayList<shows> findAllShows() {
+
         showsdb showdb = new showsdb();
-        return showdb.updateshows(showsID);
+        return showdb.findAllShows();
+
     }
-    public boolean updateshows(){
-        System.out.println("shows:update");
-        this.Print();
-        
-          showsdb showdb = new showsdb();
+
+    public shows findshowsByshowsID(String showsID) {
+        showsdb showdb = new showsdb();
+        return showdb.findshowsByshowsID(showsID);
+    }
+
+    public boolean updateshows() {
+
+        showsdb showdb = new showsdb(showsID,category,department,startingDate,closingDate,description);
         return showdb.updateshows();
     }
-      public boolean deleteshows(String showsID){
-       
-         showsdb showdb = new showsdb();
-        return showdb.deleteshows(showsID);
-    }
-    public boolean deleteshowsByshowsID(String showsID){
-       
+
+    public boolean deleteshowsByshowsID(String showsID) {
+        System.out.println("shows: showsID");
+
         showsdb showdb = new showsdb();
-        return showdb.updateshows(category);
+        return showdb.deleteshowsByshowID(showsID);
     }
-        public void Print(){
-            System.out.println("category " +category);
-        System.out.println("department " +department);
-        System.out.println("startingDate " +startingDate);
+
+    public void Print() {
+        System.out.println("category " + category);
+        System.out.println("department " + department);
+        System.out.println("startingDate " + startingDate);
         System.out.println("closingDate " + closingDate);
-        System.out.println("description" +description);
-    
-}
-    
-    
+        System.out.println("description" + description);
+
+    }
+
 }
